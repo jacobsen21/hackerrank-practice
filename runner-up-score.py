@@ -1,28 +1,33 @@
 if __name__ == '__main__':
-    # n = int(input())
-    n=3
-
+    n = int(input())
+    
     # valid number of scores allowed
     min = 2
     max = 10
     if(min <= n <= max):
-        print("valid %d" % n)
-
-        # arr = map(int, input().split())
-        arr = map(int, ['11','22','33'])
+       
+        arr = map(int, input().split())
+       
         # copy map object to a list that can be iterable
         myList = list(arr)
-        print(len(myList))
-
-        print("cast map object to list: first in list: %d" % myList[0])
-
-        # myList.sort()
-        # print(myList)
+       
+        # reverse sort the list
+        myList.sort()
         myList.reverse()
-        print(myList)
+       
+        # walk this list from highest score to next lower score - that will be the runner
+        # up score and address the possibilities of multiple highest scores
 
-        # m = max(myList())
-        # print("max from list: ", m)
+        start = 0
+        nxt = 1
+
+        # walk the reverse sorted list from highest to next highest
+        while(myList[start] <= myList[nxt]):
+            start += 1
+            nxt += 1
+
+        # done 
+        print(myList[nxt])
         
     else:
-        print("invalid %d" % n)
+        print("invalid number of scores in list: %d" % n)
