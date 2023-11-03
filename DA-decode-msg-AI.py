@@ -24,17 +24,67 @@ The numbers at the end of each line (1, 3 and 6) correspond to the words that ar
 
 and your function should return the string "I love computers"
 '''
-# path to message_file.txt
-message_file = '.'
 
-# read the file
-try:
-    with open(message_file, 'r') as file:
-        lines = file.readlines()
-
-except FileNotFoundError:
-    raise FileNotFoundError(f"the file: '{message_file} not found")
+# data filename and path
+message_file = "message_file.txt"
 
 # decode function
 def decode(message_file):
-    pass
+    
+    # read in the file contents
+    try:
+        with open(message_file, 'r') as file:
+            lines = file.readlines()
+
+    except FileNotFoundError:
+        raise FileNotFoundError(message_file)
+
+    # Check if file has the expected format
+    if len(lines) == 0:
+        raise ValueError("The file is empty.")
+
+    if not all('\n' in line for line in lines):
+        raise ValueError("The file does not have the expected format. Each line should contain a number and a word separated by a newline.")
+
+    # Split the lines into numbers and words
+    data = [line.strip().split() for line in lines]
+ 
+    # Sort the data based on the first column of numbers
+    sorted_data = sorted(data, key=lambda x: int(x[0]))
+ 
+    
+    # outer loop to handle number of rows
+    # init variables
+
+    n=len(sorted_data)
+    start_row = 0
+    result_msg = ""
+
+    # outer loop for rows
+    for i in range(n):
+        
+        # inner loop for columns
+        for j in range(i+1):
+            
+            # take last word from each row to build message
+            word = sorted_data[start_row][1]
+            print(word + " ", end="")  #debug remove
+
+            # increment next row starting position
+            start_row += 1
+      
+        # row line end
+        print("\r")
+
+        # concat decoded message
+        result_msg += word + " "
+
+        # prevent exceeding the index
+        if(start_row >= n):
+                break
+             
+    return result_msg
+
+# call the function
+result = decode(message_file)
+print("decoded message: ", result)
