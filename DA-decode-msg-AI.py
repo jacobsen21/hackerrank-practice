@@ -26,7 +26,8 @@ and your function should return the string "I love computers"
 '''
 
 # data filename and path
-message_file = "message_file.txt"
+# message_file = "message_file.txt"
+message_file = "coding_qual_input.txt"
 
 # decode function
 def decode(message_file):
@@ -54,8 +55,8 @@ def decode(message_file):
  
     
     # outer loop to handle number of rows
+    
     # init variables
-
     n=len(sorted_data)
     start_row = 0
     result_msg = ""
@@ -68,7 +69,7 @@ def decode(message_file):
             
             # take last word from each row to build message
             word = sorted_data[start_row][1]
-            print(word + " ", end="")  #debug remove
+            # print(word + " ", end="")  #debug remove
 
             # increment next row starting position
             start_row += 1
